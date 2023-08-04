@@ -529,7 +529,9 @@ namespace MyFirstProgram
 
 
 
-            //number guessing game 
+            //number guessing game: Trò chơi đoán số
+            
+
 
 
 
