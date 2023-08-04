@@ -531,16 +531,497 @@ namespace MyFirstProgram
 
             //number guessing game: Trò chơi đoán số
             
+            Random random1 = new Random();
+            //trong C# tạo ra một thể hiện mới của lớp Random.
+            //Lớp Random được sử dụng để tạo ra các số ngẫu nhiên giả.
+            //Hàm tạo new Random() sử dụng thời gian hệ thống hiện tại làm giá trị hạt cho trình tạo số ngẫu nhiên.
+            //Điều này có nghĩa là mỗi khi đoạn mã được chạy, đối tượng Random sẽ tạo ra một dãy số ngẫu nhiên khác nhau.
+
+            // định nghĩa 1 số giá biến
+            bool playAgain = true; // phải bằng true mới chạy vào được while, lý do có truyền vào playAgian = true (viết gọn playAgian )
+            int min = 1;
+            int max = 100;
+            // một số định nghĩa chưa được đặt giá trị
+            int guess;
+            int number;
+            int guesses;
+            String response; // kết quả trả về
+
+            while (playAgain)
+            {
+                // gán các giá trị ban đầu trước khi bắt đầu
+                guess = 0;
+                guesses = 0;
+                response = "";
+                //Điều kiện tạo số min max
+                /**
+                   Tham số đầu tiên là giá trị thấp nhất của khoảng.
+                   Tham số thứ hai là giá trị cao nhất của khoảng, không bao gồm giá trị này.
+                 */
+                //max + 1 lý do là 101 và số này Next sẽ đảm bảo là không bao gồm giá trị này đó là 101, max sẽ không chạy đến giá trị này.
+                //phương thức Next() sẽ tạo ra một số ngẫu nhiên trong khoảng từ 1 đến 100, bao gồm cả 1 và không bao gồm 100.
+                number = random1.Next(min, max + 1);
+                while (guess != number)
+                {
+                    Console.WriteLine("Guess a number between" + min + " - " + max + " : ");
+                    guess = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Guess: " + guess);
+
+                    if(guess > number)
+                    {
+                        Console.WriteLine(guess+ " is to high!");
+                    }else if (guess < number) 
+                    {
+                        Console.WriteLine(guess + " is to low!");
+                    }
+                    guesses++;
+                
+                }
+                Console.WriteLine("Number: " + number);
+                Console.WriteLine("You win!");
+                Console.WriteLine("Gusses: " + guesses);
+
+                Console.WriteLine("Would you like to play again (Y/N): ");
+                response = Console.ReadLine();
+                response = response.ToUpper();
+
+                if(response == "Y")
+                {
+                    playAgain = true;
+                }else
+                {
+                    playAgain = false;
+                }
+            }
+            Console.WriteLine("Thanks for playing! ... I guess");
+
+
+            // Bài tập: Giới hạn số lần đoán nếu quá số lần sẽ bị thua
+
+            Random random2 = new Random();
+
+            bool playAgain2 = true; // phải bằng true mới chạy vào được while, lý do có truyền vào playAgian = true (viết gọn playAgian )
+            int min2 = 1;
+            int max2 = 100;
+
+            int guess2;
+            int number2;
+            int guesses2;
+            String response2; // kết quả trả về
+
+            while (playAgain2)
+            {
+                guess2 = 0;
+                guesses2 = 0;
+                response2 = "";
+                number2 = random2.Next(min2, max2 + 1);
+                while (guess2 != number2 && guesses2 < 10) // Thêm điều kiện guesses < 10
+                {
+                    Console.WriteLine("Guess a number between" + min2 + " - " + max2 + " : ");
+                    guess2 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Guess: " + guess2);
+
+                    if (guess2 > number2)
+                    {
+                        Console.WriteLine(guess2 + " is to high!");
+                    }
+                    else if (guess2 < number2)
+                    {
+                        Console.WriteLine(guess2 + " is to low!");
+                    }
+                    guesses2++;
+                }
+                if (guess2 == number2)
+                {
+                    Console.WriteLine("Number: " + number2);
+                    Console.WriteLine("You win!");
+                    Console.WriteLine("Guesses: " + guesses2);
+                }
+                else
+                {
+                    Console.WriteLine("You lose! The number was: " + number2);
+                }
+
+
+                Console.WriteLine("Would you like to play again (Y/N or type any if you want exits): ");
+                response2 = Console.ReadLine();
+                response2 = response2.ToUpper();
+
+                if (response2 != "Y")
+                {
+                    playAgain2 = false;
+                }
+
+                Console.WriteLine();
+            }
+            Console.WriteLine("Thanks for playing! ... ");
 
 
 
+            // Game kéo búa bao
 
+            /*
+             //Đây là 1 hàm C# giúp tạo ra số bất kỳ khi được gọi
+             Random random = new Random();
+            // này là gán playAgain = true để lần chạy đầu tiên có thể bắt đầu chương trình
+            bool playAgain = true;
 
+            // khai báo 3 biến player, computer, anser
+            String player;
+            String computer;
+            String answer;
 
+            // dùng vòng lặp để chẹc xem là người dùng có đang muốn chơi game không, nếu mà ko vào vòng lặp thì in ra 1 cái gì đó
+            while (playAgain)
+            {
+                // gán cho các giá trị biến chuỗi rỗng
+                player = "";
+                computer = "";
+                answer = "";
+
+                // dùng vòng lặp kiểm tra người dùng điền vào là gì, nếu khác 3 giá trị  ROCK PAPER SCISSORS thì sẽ bị rơi vào vòng lặp
+                while (player != "ROCK" && player != "PAPER" && player != "SCISSORS") {
+                    Console.Write("Enter ROCK, PAPER, or SCISSORS: ");
+                    player = Console.ReadLine();
+                    player = player.ToUpper();
+                }
+
+                // nếu không bị dính vào vòng lặp trên thì sẽ chạy tiếp dưới này
+                // tiếp tục check điều kiện 
+                // điều kiện: là gọi hàm random xong đưa vào khoảng 1 -> 4
+                switch (random.Next(1, 4))
+                {
+                    case 1:
+                        computer = "ROCK";
+                        break;
+                    case 2:
+                        computer = "PAPER";
+                        break;
+                    case 3:
+                        computer = "SCISSORS";
+                        break;
+                }
+                
+                // in ra kết quả player và computer đã chọn
+                Console.WriteLine("Player: " + player);
+                Console.WriteLine("Computer: " + computer);
+
+                // check 2 kết quả của player và computer
+                switch (player)
+                {
+                    case "ROCK":
+                        if (computer == "ROCK")
+                        {
+                            Console.WriteLine("It's a draw!");
+                        }
+                        else if (computer == "PAPER")
+                        {
+                            Console.WriteLine("You lose!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You win!");
+                        }
+                        break;
+                    case "PAPER":
+                        if (computer == "ROCK")
+                        {
+                            Console.WriteLine("You win!");
+                        }
+                        else if (computer == "PAPER")
+                        {
+                            Console.WriteLine("It's a draw!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You lose!");
+                        }
+                        break;
+                    case "SCISSORS":
+                        if (computer == "ROCK")
+                        {
+                            Console.WriteLine("You lose!");
+                        }
+                        else if (computer == "PAPER")
+                        {
+                            Console.WriteLine("You win!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("It's a draw!");
+                        }
+                        break;
+                }
+
+                // Câu này sẽ tự động đưa ra hỏi có muốn chơi tiếp không
+                Console.Write("Would you like to play again (Y/N): ");
+
+                // nhập vào câu trả lời
+                answer = Console.ReadLine();
+                answer = answer.ToUpper();
+
+                // check điều kiện answer
+                if (answer == "Y")
+                {
+                    playAgain = true;
+                }
+                else
+                {
+                    playAgain = false;
+                }
+                
+            }
+
+            // nếu thoát được vòng lặp, và in ra câu chào
+            Console.WriteLine("Thanks for playing!");
+             */
 
 
             //ẩn các thông tin không cần thiết, chỉ hiện code chạy, lưu ý luôn đặt cuối cùng, tránh ngăn chặn code chạy
+
+
+
+
+            // calculator program: làm máy tính
+
+            /*
+             
+             
+             do
+                {
+                    double num1 = 0;
+                    double num2 = 0;
+                    double result = 0;
+
+                    Console.WriteLine("------------------");
+                    Console.WriteLine("Calculator Program");
+                    Console.WriteLine("------------------");
+
+                    Console.Write("Enter number 1: ");
+                    num1 = Convert.ToDouble(Console.ReadLine());
+
+                    Console.Write("Enter number 2: ");
+                    num2 = Convert.ToDouble(Console.ReadLine());
+
+                    Console.WriteLine("Enter an option: ");
+                    Console.WriteLine("\t+ : Add");
+                    Console.WriteLine("\t- : Subtract");
+                    Console.WriteLine("\t* : Multiply");
+                    Console.WriteLine("\t/ : Divide");
+                    Console.Write("Enter an option: ");
+
+                    switch (Console.ReadLine())
+                    {
+                        case "+":
+                            result = num1 + num2;
+                            Console.WriteLine($"Your result: {num1} + {num2} = " + result);
+                            break;
+                        case "-":
+                            result = num1 - num2;
+                            Console.WriteLine($"Your result: {num1} - {num2} = " + result);
+                            break;
+                        case "*":
+                            result = num1 * num2;
+                            Console.WriteLine($"Your result: {num1} * {num2} = " + result);
+                            break;
+                        case "/":
+                            result = num1 / num2;
+                            Console.WriteLine($"Your result: {num1} / {num2} = " + result);
+                            break;
+                        default:
+                            Console.WriteLine("That was not a valid option");
+                            break;
+                    }
+                    
+                    Console.Write("Would you like to continue? (Y = yes, N = No): ");
+                } while (Console.ReadLine().ToUpper() == "Y"); 
+                // vòng lặp do while nếu thỏa điều kiện thì sẽ tiếp tục lặp, không thì chạy tiếp
+
+                Console.WriteLine("Bye!");
+             
+             
+             */
+
+            // Lý thuyết về vòng lặp do while
+            /*
+             Vòng lặp do-while sẽ chạy chắc chắn lần đầu, sau đó nó sẽ kiểm tra điều kiện vòng lặp. 
+             Nếu điều kiện là đúng, vòng lặp sẽ chạy lại từ đầu. Quá trình này tiếp tục cho đến khi điều kiện là sai.
+             */
+
+
+
+
+            // Array = a variable that can store multiple values. fixed size
+            // Mảng = một biến có thể lưu trữ nhiều giá trị. Kích thước cố định.
+            // Hiểu nôn na là mảng => [], trong mảng có thể chứa các số, chuỗi các ký tự, true/false, đối tượng...
+
+            // này chuỗi
+            String car = "BMW";
+            // muốn chuỗi thành mãng
+            String[] cars = {"BMW"," Ford", "Lexus", "Mercedes"};
+
+            Console.WriteLine(cars);// chỉ hiện ra type
+            Console.WriteLine(cars[0]); // hiện ra được phần tử đứng vị trí đó
+            Console.WriteLine(cars[1]);
+            Console.WriteLine(cars[2]);
+            Console.WriteLine(cars[3]);
+
+            // gán lại giá trị trong mảng
+            cars[0] = "Tesla";
+            Console.WriteLine(cars[0]);
+
+            // Trong này là code đồng bộ từ trên xuống dưới.
+
+
+            // Bạn thấy việt Console.writeLine nhiều thấy cực không?
+            // Hãy liên tưởng lại vòng lặp for
+
+            // ngắn gọn như này thui. xong!!! 
+            for(int i = 0; i < cars.Length; i++)
+            {
+                Console.WriteLine(cars[i]);
+            }
+
+            // mảng theo cách khác  || String[5] "độ dài" (length) của mảng là 5
+            String[] fruits = new String[5];
+
+            fruits[0] = "Banana ";
+            fruits[1] = "Apple ";
+            fruits[2] = "Orange ";
+            fruits[3] = "Strawberry ";
+            fruits[4] = "Coconut ";
+
+            for(int i = 0; i < fruits.Length; i++)
+            {
+                Console.WriteLine(fruits[i]);
+            }
+
+
+            // foreach loop = a simpler way to iterate over an array, but it's less flexible
+            // vòng lặp for each = "Một cách đơn giản hơn để lặp qua một mảng, nhưng nó ít linh hoạt hơn."
+
+            foreach (String fruit in fruits)
+            {
+                Console.WriteLine(fruit);
+            }
+
+
+
+            // method = performs a section of code, whenever it's called "invoked"
+            //          benefit = Let's us reuse code w/o writing it multiple times.            
+
+            /*
+                Phương thức = thực hiện một phần mã, bất cứ khi nào nó được gọi "invoked: triệu hồi"
+                        Lợi ích = Cho phép chúng ta tái sử dụng mã không cần viết lại nhiều lần
+             */
+
+            //bad: tệ code lặp khá nhiều lần
+            Console.WriteLine("Happy birthday to you!!!");
+            Console.WriteLine("Happy birthday to you!!!");
+            Console.WriteLine("Happy birthday Happy birthday!!!");
+            Console.WriteLine("Happy birthday to you!!!");
+
+            Console.WriteLine("Happy birthday to you!!!");
+            Console.WriteLine("Happy birthday to you!!!");
+            Console.WriteLine("Happy birthday Happy birthday!!!");
+            Console.WriteLine("Happy birthday to you!!!");
+
+            Console.WriteLine("Happy birthday to you!!!");
+            Console.WriteLine("Happy birthday to you!!!");
+            Console.WriteLine("Happy birthday Happy birthday!!!");
+            Console.WriteLine("Happy birthday to you!!!");
+
+            //Good: nên dùng cách này, tối ưu code hơn
+
+            // Bước 1: viết 1 phương thức singHappyBirthday() ở bên ngoài
+
+            // Bước 2: thực hiện gọi phương thức đó vào trong đây
+            singHappyBirthday(); // gọi phương thức || giống callbacks trong js nhỉ?
+            singHappyBirthday();
+            singHappyBirthday();
+
+            /*
+             Tóm tắt:
+
+            Hàm Main() gọi hàm singHappyBirthday() ba lần. 
+            Điều này có nghĩa là lời bài hát Chúc mừng sinh nhật sẽ được in ra ba lần. 
+            Hàm singHappyBirthday() in ra lời bài hát Chúc mừng sinh nhật bằng cách gọi phương thức Console.WriteLine() ba lần. 
+            Phương thức Console.WriteLine() in ra một chuỗi lên bảng điều khiển.
+
+
+             */
+
+
+            /*Hàm và có truyền đối số*/
+            String myNameis = "Tuan"; // khai báo biến myNameis và gán giá trị dữ liệu
+            int myAgeis = 23;
+            // gọi hàm và truyền đối số
+            sayHello(myNameis);
+
+            //Truyền với 2 đối số
+            howOldAreYou(myNameis, myAgeis);
+
+
+
+
+            //Bài mới học về return
+
+            // return = returns data back to the place where a method is invoked
+
+            double xxxx;
+            double yyyy;
+
+            double result;
+
+            Console.WriteLine("Enter in number 1: ");
+            xxxx = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Enter in number 2: ");
+            yyyy = Convert.ToDouble(Console.ReadLine());
+
+            result = Multiply(xxxx, yyyy); // gọi hàm Multiply sẽ trả về kết quả của zzzz và gán cho result
+
+            Console.WriteLine("Mutiple: " + result);
+
             Console.ReadKey();
         }
+
+        // viết một phương thức
+        static void singHappyBirthday()
+        {
+            Console.WriteLine("Happy birthday to you!!!");
+            Console.WriteLine("Happy birthday to you!!!");
+            Console.WriteLine("Happy birthday Happy birthday!!!");
+            Console.WriteLine("Happy birthday to you!!!");
+        }
+
+        // vì hàm trên kia là có truyền đối số nên phải khi truyền vào phải báo cáo là nó có kiểu dữ liệu gì và tên nó là gì
+        // Đây là đối số: String myNameis
+        static void sayHello(String myNameis)
+        {
+            Console.WriteLine("                  ");
+            Console.WriteLine("Hello" + myNameis);
+            Console.WriteLine("How it's going" + myNameis);
+            Console.WriteLine("Okay!!!");
+            Console.WriteLine("Bye!!!");
+        }
+
+        static void howOldAreYou(String myNameis, int myAgeis)
+        {
+            Console.WriteLine("                  ");
+            Console.WriteLine("Hello" + myNameis);
+            Console.WriteLine("How old are you?");
+            Console.WriteLine("Oh you are" + myAgeis);
+            Console.WriteLine("Bye!!!");
+        }
+
+        // chú ý: khi dữ liệu trả về kiểu gì thì void đó nên thay đổi thành kiểu dữ liệu mà nó sẽ trả về,
+        //Bạn có thể thấy static void đã phải chuyển thành static double, để phù hợp hơn với kiểu dữ liệu trả về. 
+        static double Multiply( double xxxx, double yyyy)
+        {
+            double zzzz = xxxx * yyyy;
+            return zzzz;
+        }
+
     }
 }
