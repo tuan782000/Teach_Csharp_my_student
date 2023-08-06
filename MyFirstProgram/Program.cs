@@ -970,6 +970,7 @@ namespace MyFirstProgram
 
             double xxxx;
             double yyyy;
+            double oooo;
 
             double result;
 
@@ -982,6 +983,60 @@ namespace MyFirstProgram
             result = Multiply(xxxx, yyyy); // gọi hàm Multiply sẽ trả về kết quả của zzzz và gán cho result
 
             Console.WriteLine("Mutiple: " + result);
+
+            Console.WriteLine("Enter in number 3: ");
+            oooo = Convert.ToDouble(Console.ReadLine());
+
+            result = Multiply(xxxx, yyyy, oooo);
+            Console.WriteLine("Mutiple: " + result);
+
+            //method overloading 🤯
+
+            //method overloading = methods share same name, but different parametters
+            //                     name + parametters = signature
+            //                     methods must have a unique signature
+
+            // dịch:
+            /*                      các phương thức có cùng tên nhưng khác tham số
+                                    Tên + tham số = chữ ký (signature)
+                                    các phương thức phải có một chữ ký duy nhất
+             */
+
+
+
+
+
+            // params keyword: a method parameter that takes a variable number of arguments
+            //                The parameter type must be a single - dimensional array.
+
+            /*
+                "params keyword: một tham số của phương thức chấp nhận một số lượng biến đổi của đối số."
+
+                "Kiểu tham số phải là một mảng một chiều duy nhất."
+             */
+
+
+            double totalPrice = CheckOut(3.99, 5.75, 15, 7, 8, 9.999);
+
+            Console.WriteLine(totalPrice);
+
+
+
+            //exception handling ⚠️
+
+            // exception = errors that occur during execution
+
+            //        try     = try some code that is considered "dangerous"
+            //        catch   = catches and handles exceptions when they occur
+            //        finally = always executes regardless if exception is caught or not
+
+            // exception = lỗi xảy ra trong quá trình thực thi
+            // try     = thử một số mã được coi là "nguy hiểm"
+            // catch   = bắt và xử lý ngoại lệ khi chúng xảy ra
+            // finally = luôn thực thi bất kể ngoại lệ có bị bắt hay không
+
+
+
 
             Console.ReadKey();
         }
@@ -1021,6 +1076,58 @@ namespace MyFirstProgram
         {
             double zzzz = xxxx * yyyy;
             return zzzz;
+        }
+
+        // sẽ sử dụng kiến thức overloading cho phép 2 phương thức trùng nhau nhưng khác đối số truyền vào
+        static double Multiply(double xxxx, double yyyy, double oooo)
+        {
+            double zzzzz = xxxx * yyyy * oooo;
+            return zzzzz;
+        }
+
+        //bài params keywords.
+        //Vẫn áp dụng overloading vừa học, ta sẽ thấy nhược điểm, chính vì vậy ta sẽ dùng params để thay thế
+        static double CheckOut(double a)
+        {
+            return a;
+        }
+        static double CheckOut(double a, double b)
+        {
+            return a + b;
+        }
+
+        static double CheckOut(double a, double b, double c)
+        {
+            return a + b + c;
+        }
+
+        static double CheckOut(double a, double b, double c, double d)
+        {
+            return a + b + c + d;
+        }
+
+        static double CheckOut(double a, double b, double c, double d, double e)
+        {
+            return a + b + c + d + e;
+        }
+
+        // cải tiến
+
+        /*
+         params trong C# được sử dụng để khai báo một tham số phương thức có thể nhận một số lượng đối số biến. 
+         Trong trường hợp này, tham số prices có thể nhận một số lượng đối số double biến. 
+         Điều này có nghĩa là bạn có thể gọi phương thức CheckOut() với bất kỳ số lượng đối số double nào, 
+         và nó sẽ cộng tất cả các giá lại với nhau.
+         */
+        static double CheckOut(params double[] prices)
+        {
+            //totalPrice này sẽ khác với totalPrice kia tại nó nằm 2 static khác nhau 
+            double totalPrice = 0;
+            foreach(double price in prices)
+            {
+                totalPrice += price;
+            }
+            return totalPrice;
         }
 
     }

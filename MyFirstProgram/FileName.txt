@@ -1,0 +1,766 @@
+﻿ C# array of objects 🏬
+
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+        static void Main(string[] args) {
+
+
+            Car[] garage = { new Car("Mustang"), new Car("Corvette"), new Car("Lambo") }; 
+            //tạo ra một mảng garage chứa 3 đối tượng Car với các mô hình tương ứng là "Mustang", "Corvette", và "Lambo".
+
+            foreach (Car car in garage)
+            {
+                Console.WriteLine(car.model); // Dòng Console.WriteLine(car.model); in ra màn hình thông tin về mô hình xe (model) của đối tượng Car hiện tại.
+            }
+            // Vòng lặp foreach được sử dụng để duyệt qua từng phần tử trong mảng garage. Đầu tiên, phần tử đầu tiên trong mảng được gán cho biến car.
+            
+            //Vòng lặp tiếp tục với phần tử tiếp theo trong mảng, và lại thực hiện câu lệnh in thông tin mô hình xe. Quá trình này được lặp lại cho tất cả các phần tử trong mảng garage.
+            
+            //Sau khi vòng lặp foreach kết thúc, chương trình đến dòng Console.ReadKey();. Chương trình sẽ dừng lại ở đây và chờ người dùng nhấn một phím bất kỳ trên bàn phím.
+
+            Console.ReadKey(); //
+            
+            //Khi người dùng nhấn một phím, chương trình tiếp tục thực thi và kết thúc.
+        }   
+    }
+    class Car 
+    {
+        public String model;
+
+        public Car(String model)
+        {
+            this.model = model;
+        }
+    }
+}
+
+
+======================================================================================================================
+
+C# objects as arguments 🧳
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+        static void Main(string[] args) {
+
+            Car car1 = new Car("Mustang","red");
+
+            Car car2 = Copy(car1);
+
+            Console.WriteLine(car2.color + " " + car2.model);
+
+            Console.ReadKey();
+        }
+
+        public static void ChangeColor(Car car, String color)
+        {
+            car.color = color;
+        }
+
+        public static Car Copy(Car car)
+        {
+            return new Car(car.model, car.color);
+        }
+    }
+    class Car 
+    {
+        public String model;
+        public String color;
+
+        public Car(String model, String color)
+        {
+            this.model = model;
+            this.color = color;
+        }
+    }
+}
+
+
+
+==================================================================================
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+        static void Main(string[] args) {
+
+            //method overriding = provides a new version of a method inherited from a parent class
+            //                    inherited method must be: abstract, virtual, or already overriden
+            //                    Used with ToString(), polymorphism 
+
+            // Phương thức ghi đè = cung cấp phiên bản mới của phương thức được kế thừa từ lớp cha
+            //                      Phương thức được kế thừa phải là: trừu tượng, ảo hoặc đã được ghi đè
+            //                      Được sử dụng với ToString (), đa hình
+
+            // tạo ra dog kế thừa Dog tương tự cat
+            Dog dog = new Dog();
+            Cat cat = new Cat();
+
+            // sử dụng phưng thức speak();
+            dog.Speak();
+            cat.Speak();
+
+            Console.ReadKey();
+        }
+    }
+    // tạo đối tượng animal
+    class Animal 
+    {
+        // ảo: virtual phương thức speak()
+        public virtual void Speak()
+        {
+            Console.WriteLine("The animal goes *brrr*");
+        }
+    }
+    //Dog kế thừa animal
+    class Dog : Animal
+    {
+        // override: ghi đè, phương thức speak
+        public override void Speak()
+        {
+            Console.WriteLine("The dog goes *woof*");
+        }
+    }
+    // Cat kế thừa animal
+    class Cat : Animal
+    {
+        public override void Speak()
+        {
+            Console.WriteLine("The meow goes *meow*");
+        }
+    }
+}
+
+==============================================================================================================
+ToString method 💭
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program 
+    {
+        static void Main(string[] args)
+        {
+
+            //ToString() = converts an object to its string representation so that it is suitable for display
+
+            //ToString() = chuyển đổi một đối tượng thành biểu diễn chuỗi của nó để nó phù hợp để hiển thị
+
+            // chuyển đổi đối tượng thành chuỗi
+
+            Car car = new Car("Chevy", "Corvette", 2022, "blue");
+
+            Console.WriteLine(car.ToString());
+
+            Console.ReadKey();
+        }
+    }
+    class Car
+    {
+        String make;
+        String model;
+        int year;
+        String color;
+
+        public Car(String make, String model, int year, String color)
+        {
+            this.make = make;
+            this.model = model;
+            this.year = year;
+            this.color = color;
+        }
+        public override string ToString()
+        {       
+            return "This is a " + make + " " + model;
+        }
+    }
+}
+
+
+=================================================================================================================
+using System;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+        static void Main(string[] args) {
+
+            // polymorphism = Greek word that means to "have many forms"
+            //                Objects can be identified by more than one type
+            //                Ex. A Dog is also: Canine, Animal, Organism
+
+
+            // polymorphism = từ tiếng Hy Lạp có nghĩa là "có nhiều hình thức"
+            //                Các đối tượng có thể được xác định bởi nhiều loại
+            //                Ví dụ. Một con Chó cũng là: Chó sói, Động vật, Sinh vật
+
+
+            Car car = new Car();
+            Bicycle bicycle = new Bicycle();
+            Boat boat = new Boat();
+
+            //Định nghĩa mảng vehicles bằng Vehicle [] nạp vào nó cái đối tượng
+            Vehicle[] vehicles = {car, bicycle, boat};
+
+            // dùng vòng lặp để lặp ra vehicle
+            foreach (Vehicle vehicle in vehicles)
+            {
+                vehicle.Go();
+            }
+           
+            Console.ReadKey();
+        }
+    }
+    // định nghĩa ra Vehicle, trong nó có phương thức Go
+    class Vehicle
+    {
+        public virtual void Go()
+        {
+
+        }
+    }
+    // Car kế thừa Vehicle và ghi đè lại phương thức Go cho riêng mình
+    class Car: Vehicle
+    {
+        public override void Go()
+        {
+            Console.WriteLine("The car is moving!");
+        }
+    }
+    // Bicycle kế thừa Vehicle và ghi đè lại phương thức Go cho riêng mình
+    class Bicycle : Vehicle
+    {
+        public override void Go()
+        {
+            Console.WriteLine("The bicycle is moving!");
+        }
+    }
+    // Boat kế thừa Vehicle và ghi đè lại phương thức Go cho riêng mình
+    class Boat : Vehicle
+    {
+        public override void Go()
+        {
+            Console.WriteLine("The boat is moving!");
+        }
+    }
+}
+
+
+==========================================================================================================
+interfaces 🐟
+
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // interface = defines a "contract" that all the classes inheriting from should follow
+
+            //             An interface declares "what a class should have"
+            //             An inheriting class defines "how it should do it"
+
+            //             benefits = security + multiple inheritance + "plug-and-play"
+
+            
+            // interface = định nghĩa một "hợp đồng" mà tất cả các lớp kế thừa từ đó phải tuân theo
+
+            //             Một giao diện khai báo "lớp nên có gì"
+            //             Một lớp kế thừa định nghĩa "cách thức thực hiện"
+            //             lợi ích = bảo mật + thừa kế nhiều + "cắm và chạy"
+
+
+            // Đầu tiên, trong phương thức Main, ba đối tượng rabbit, hawk và fish được khởi tạo từ các lớp Rabbit, Hawk và Fish tương ứng.
+            Rabbit rabbit = new Rabbit();
+            Hawk hawk = new Hawk();
+            Fish fish = new Fish();
+
+
+            //Các đối tượng rabbit, hawk và fish được sử dụng để gọi các phương thức Flee và Hunt.
+            rabbit.Flee();
+            hawk.Hunt();
+            fish.Flee();
+            fish.Hunt();
+
+            // -- Cuối cùng Khi chạy, các phương thức Flee và Hunt tương ứng với từng đối tượng sẽ được gọi 
+            // và thông điệp tương ứng sẽ được in ra màn hình console.--
+
+            Console.ReadKey();
+        }
+
+        //Các phương thức Flee và Hunt được định nghĩa trong các interface IPrey và IPredator.
+
+        //Interface IPrey chỉ định một phương thức Flee, mô tả hành động "trốn" của con mồi.
+        interface IPrey
+        {
+            void Flee();
+        }
+        //Interface IPredator chỉ định một phương thức Hunt, mô tả hành động "săn mồi" của kẻ săn đuổi.
+        interface IPredator
+        {
+            void Hunt();
+        }
+
+        //Lớp Rabbit kế thừa từ interface IPrey và triển khai phương thức Flee. 
+        //Điều này có nghĩa là lớp Rabbit tuân theo "hợp đồng" của interface IPrey và cung cấp cách thức thực hiện hành động "trốn".
+        class Rabbit : IPrey
+        {
+            public void Flee()
+            {
+                Console.WriteLine("The rabbit runs away!");
+            }
+        }
+
+        //Lớp Hawk kế thừa từ interface IPredator và triển khai phương thức Hunt. 
+        //Điều này có nghĩa là lớp Hawk tuân theo "hợp đồng" của interface IPredator và cung cấp cách thức thực hiện hành động "săn".
+        class Hawk : IPredator
+        {
+            public void Hunt()
+            {
+                Console.WriteLine("The hawk is searching for food!");
+            }
+        }
+
+        //Lớp Fish kế thừa từ cả IPrey và IPredator và triển khai cả hai phương thức Flee và Hunt. 
+        //Điều này có nghĩa là lớp Fish tuân theo cả "hợp đồng" của IPrey và IPredator, 
+        //cung cấp cách thức thực hiện cả hành động "trốn" và "săn".
+        class Fish : IPrey, IPredator
+        {
+            public void Flee()
+            {
+                Console.WriteLine("The fish swims away!");
+            }
+            public void Hunt()
+            {
+                Console.WriteLine("The fish is searching for smaller fish!");
+            }
+        } 
+    }  
+}
+
+
+// Lists 📃
+
+
+using System;
+using System.Collections.Generic;
+
+namespace MyFirstProgram
+{
+    class Program 
+    {
+        static void Main(string[] args)
+        {
+
+            // List = data structure that represents a list of objects that can be accessed by index.
+            //        Similar to array, but can dynamically increase/decrease in size 
+            //        using System.Collections.Generic;
+
+            // Danh sách = cấu trúc dữ liệu đại diện cho một danh sách các đối tượng có thể được truy cập bằng chỉ mục.
+            //        Tương tự như mảng, nhưng có thể thay đổi kích thước động.
+            //        sử dụng System.Collections.Generic;
+
+            List<String> food = new List<String>();
+
+            food.Add("pizza");
+            food.Add("hamburger");
+            food.Add("hotdog");
+            food.Add("fries");
+
+            //Console.WriteLine(food[0]);
+            //Console.WriteLine(food[1]);
+            //Console.WriteLine(food[2]);
+            //Console.WriteLine(food[3]);
+
+            //food.Remove("fries");
+            //food.Insert(0, "sushi");
+            //Console.WriteLine(food.Count);
+            //Console.WriteLine(food.IndexOf("pizza"));
+            //Console.WriteLine(food.LastIndexOf("fries"));
+            //Console.WriteLine(food.Contains("pizza"));
+            //food.Sort();
+            //food.Reverse();
+            //food.Clear();
+            //String[] foodArray = food.ToArray();
+
+            foreach (String item in food)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
+
+List of objects 🦸‍♂️
+
+
+using System;
+using System.Collections.Generic;
+
+namespace MyFirstProgram
+{
+    class Program 
+    {
+        static void Main(string[] args)
+        {
+            List<Player> players = new List<Player>();
+
+            players.Add(new Player("Chad"));
+            players.Add(new Player("Steve"));
+            players.Add(new Player("Karen"));
+
+            foreach (Player player in players)
+            {
+                Console.WriteLine(player);
+            }
+
+            Console.ReadKey();
+        }
+    }
+
+    class Player
+    {
+        public String username;
+
+        public Player(String username)
+        {
+            this.username = username;
+        }
+        public override string ToString()
+        {
+            return username;
+        }
+    }
+}
+
+
+
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //getters & setters = add security to fields by encapsulation
+            //                    They're accessors found within properties
+
+            // properties = combine aspects of both fields and methods (share name with a field)
+            // get accessor = used to return the property value
+            // set accessor = used to assign a new value
+            // value keyword = defines the value being assigned by the set (parameter)
+
+
+            // getters và setters = thêm bảo mật cho các trường bằng cách đóng gói
+            //                    Chúng là các bộ điều hợp được tìm thấy trong các thuộc tính
+
+            // thuộc tính = kết hợp các khía cạnh của cả trường và phương thức (chia sẻ tên với một trường)
+            // get accessor = được sử dụng để trả về giá trị thuộc tính
+            // set accessor = được sử dụng để gán giá trị mới
+            // từ khóa value = xác định giá trị được gán bởi set (tham số)
+            
+
+            /*
+            
+            getters và setters = là các phương thức được sử dụng để truy cập và thay đổi giá trị của một trường.
+            thêm bảo mật cho các trường bằng cách đóng gói là cách bảo vệ các trường khỏi bị truy cập trực tiếp, điều này có thể giúp ngăn chặn lỗi và bảo vệ dữ liệu.
+            Chúng là các bộ điều hợp được tìm thấy trong các thuộc tính là cách nói rằng getters và setters là một phần của thuộc tính.
+            thuộc tính = kết hợp các khía cạnh của cả trường và phương thức (chia sẻ tên với một trường) là cách nói rằng thuộc tính là một loại trường đặc biệt có các phương thức getter và setter.
+            get accessor = được sử dụng để trả về giá trị thuộc tính là cách nói rằng getter là phương thức được sử dụng để lấy giá trị của thuộc tính.
+            set accessor = được sử dụng để gán giá trị mới là cách nói rằng setter là phương thức được sử dụng để đặt giá trị mới cho thuộc tính.
+            từ khóa value = xác định giá trị được gán bởi set (tham số) là cách nói rằng từ khóa value được sử dụng trong setter để xác định giá trị mới được gán cho thuộc tính.
+            
+            */
+
+
+
+            Car car = new Car(400);
+
+            car.Speed = 1000000000;
+
+            Console.WriteLine(car.Speed);
+
+            Console.ReadKey();
+        }   
+    }
+    class Car
+    {
+        private int speed;
+
+        public Car(int speed)
+        {
+            Speed = speed;
+        }
+
+        public int Speed
+        {
+            get { return speed; }
+            set                   
+            {
+                if (value > 500)
+                {
+                    speed = 500;
+                }
+                else
+                {
+                    speed = value;
+                }
+            }
+        }
+
+    }
+}
+
+
+auto implemented properties 🔐
+
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program 
+    {
+        static void Main(string[] args)
+        {
+            // auto-Implemented property =  shortcut when no additional logic is required in the property
+            //                                you do not have to define a field for a property,
+            //                                you only have to write get; and/or set; inside the property                             
+
+            // Thuộc tính được tự triển khai = Viết tắt khi không cần logic bổ sung trong thuộc tính
+            //                                bạn không cần phải định nghĩa một trường cho thuộc tính,
+            //                                bạn chỉ cần viết get; và/hoặc set; bên trong thuộc tính
+
+
+            /*
+            Thuộc tính được tự triển khai là một loại thuộc tính đặc biệt trong đó không cần định nghĩa một trường riêng biệt cho thuộc tính.
+            lối tắt khi không cần logic bổ sung trong thuộc tính là cách nói rằng auto-implemented properties là một cách viết ngắn gọn cho các thuộc tính mà không cần bất kỳ logic bổ sung nào trong các phương thức getter và setter.
+            bạn không cần phải định nghĩa một trường cho thuộc tính là cách nói rằng auto-implemented properties tự động tạo một trường ẩn cho thuộc tính.
+            bạn chỉ cần viết get; và/hoặc set; bên trong thuộc tính là cách nói rằng các phương thức getter và setter cho auto-implemented properties được tự động tạo và không cần phải viết thêm mã.
+            */
+
+            Car car = new Car("Porsche");
+
+            Console.WriteLine(car.Model);
+
+            Console.ReadKey();
+        }
+    }
+
+    class Car
+    {
+        public String Model {get; set;}
+
+        public Car(String model)
+        {
+            this.Model = model;
+        }
+    }
+}
+
+
+
+
+---enums---- 
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            // enums = special "class" that contains a set of named integer constants.
+            //         Use enums when you have values that you know will not change,
+            //         To get the integer value from an item, you must explicitly convert to an int
+
+            //         name = integer
+
+            // enums = class đặc biệt "class" chứa một tập hợp các hằng số số nguyên có tên.
+            //         Sử dụng enums khi bạn có các giá trị mà bạn biết sẽ không thay đổi,
+            //         Để lấy giá trị số nguyên từ một mục, bạn phải chuyển đổi rõ ràng thành một int
+
+
+
+
+            //Console.WriteLine(Planets.Mercury + " is planet #" + (int)Planets.Mercury);
+            //Console.WriteLine(Planets.Pluto + " is planet #" + (int)Planets.Pluto);
+
+            String name = PlanetRadius.Earth.ToString();
+            int radius = (int)PlanetRadius.Earth;
+            double volume = Volume(PlanetRadius.Earth);
+
+            Console.WriteLine("planet: " + name);
+            Console.WriteLine("radius: " + radius +"km");
+            Console.WriteLine("volume: " + volume +"km^3");
+
+            Console.ReadKey();
+        }
+        public static double Volume(PlanetRadius radius)
+        {
+            double volume = (4.0 / 3.0) * Math.PI * Math.Pow((int)radius, 3);
+            return volume;
+        }
+    }
+    enum Planets
+    {
+        Mercury = 1, 
+        Venus = 2, 
+        Earth = 3, 
+        Mars = 4, 
+        Jupiter = 5, 
+        Saturn = 6, 
+        Uranus = 7, 
+        Neptune = 8, 
+        Pluto = 9
+    }
+
+    enum PlanetRadius
+    {
+        Mercury = 2439,
+        Venus = 6051,
+        Earth = 6371,
+        Mars = 3389,
+        Jupiter = 69911,
+        Saturn = 58232,
+        Uranus = 25362,
+        Neptune = 24622,
+        Pluto = 1188
+    }
+}
+
+
+
+//generics ⁉️
+
+
+using System;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // generic =  "not specific to a particular data type"
+            //            add <T> to: classes, methods, fields, etc.
+            //            allows for code reusability for different data types
+
+            // generic =  "không cụ thể cho một kiểu dữ liệu cụ thể"
+            //             thêm <T> vào: lớp, phương thức, trường, v.v.
+            //            cho phép tái sử dụng mã cho các kiểu dữ liệu khác nhau
+
+            Generic là một tính năng của C# cho phép bạn viết mã không cụ thể cho một kiểu dữ liệu cụ thể.
+            T là một placeholder cho một kiểu dữ liệu.
+            Thêm <T> vào: lớp, phương thức, trường, v.v. là cách nói rằng bạn có thể sử dụng generics với các lớp, phương thức, trường, v.v.
+            Cho phép tái sử dụng mã cho các kiểu dữ liệu khác nhau là cách nói rằng generics cho phép bạn tái sử dụng mã cho các kiểu dữ liệu khác nhau.
+
+            int[] intArray = { 1, 2, 3 };
+            double[] doubleArray = { 1.0, 2.0, 3.0 };
+            String[] stringArray = { "1", "2", "3" };
+
+            displayElements(intArray);
+            displayElements(doubleArray);
+            displayElements(stringArray);
+
+            Console.ReadKey();
+        }     
+        public static void displayElements<Thing>(Thing[] array)
+        {
+            foreach (Thing item in array)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+
+multithreading 🧶 Đa luồng
+
+
+using System;
+using System.Threading;
+
+namespace MyFirstProgram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // thread = an execution path of a program
+            //          We can use multiple threads to perform,
+            //          different tasks of our program at the same time.
+            //          Current thread running is "main" thread
+            //          using System.Threading;
+
+
+            // Luồng = một đường dẫn thực thi của chương trình
+            //          Chúng ta có thể sử dụng nhiều luồng để thực hiện,
+            //          các tác vụ khác nhau của chương trình của chúng ta cùng một lúc.
+            //          Luồng hiện đang chạy là "luồng chính"
+            //          sử dụng System.Threading;
+
+            Luồng là một đơn vị thực thi nhỏ của một chương trình. Mỗi luồng có một ngăn xếp riêng, bộ chỉ mục lệnh riêng và bộ nhớ cục bộ riêng.
+            Chúng ta có thể sử dụng nhiều luồng để thực hiện, các tác vụ khác nhau của chương trình của chúng ta cùng một lúc là cách nói rằng các luồng có thể được sử dụng để thực hiện các tác vụ khác nhau cùng một lúc, điều này có thể giúp tăng tốc độ của chương trình.
+            Luồng hiện đang chạy là "luồng chính" là cách nói rằng luồng chính là luồng đầu tiên được tạo ra khi một chương trình bắt đầu.
+            sử dụng System.Threading; là cách nói rằng mã này sử dụng không gian tên System.Threading, có chứa các lớp và API cho phép bạn tạo và quản lý các luồng.
+
+            Thread mainThread = Thread.CurrentThread;
+            mainThread.Name = "Main Thread";
+            //Console.WriteLine(mainThread.Name);
+
+            Thread thread1 = new Thread(() => CountDown("Timer #1"));
+            Thread thread2 = new Thread(() => CountUp("Timer #2"));
+
+            thread1.Start();
+            thread2.Start();
+
+            Console.WriteLine(mainThread.Name + " is complete!");
+
+            Console.ReadKey();
+        }  
+        public static void CountDown(String name)
+        {
+            for (int i = 10; i >= 0; i--)
+            {
+                Console.WriteLine("Timer #1 : " + i + " seconds");
+                Thread.Sleep(1000);
+            }
+            Console.WriteLine("Timer #1 is complete!");
+        }
+        public static void CountUp(String name)
+        {
+            for (int i = 0; i <= 10; i++)
+            {
+                Console.WriteLine("Timer #2 : " + i + " seconds");
+                Thread.Sleep(1000);
+            }
+            Console.WriteLine("Timer #2 is complete!");
+        }
+    }
+}
