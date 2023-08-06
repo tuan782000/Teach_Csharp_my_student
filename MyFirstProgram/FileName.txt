@@ -379,26 +379,26 @@ namespace MyFirstProgram
 
             List<String> food = new List<String>();
 
-            food.Add("pizza");
-            food.Add("hamburger");
-            food.Add("hotdog");
-            food.Add("fries");
+            food.Add("pizza"); // thêm vào trong mảng || vị trí thêm cuối mảng
+            food.Add("hamburger");  // thêm vào trong mảng || vị trí thêm cuối mảng
+            food.Add("hotdog");  // thêm vào trong mảng || vị trí thêm cuối mảng
+            food.Add("fries");  // thêm vào trong mảng || vị trí thêm cuối mảng
 
-            //Console.WriteLine(food[0]);
+            //Console.WriteLine(food[0]); // Hiển thị phần tử trong mảng dựa vào tham số truyền vào
             //Console.WriteLine(food[1]);
             //Console.WriteLine(food[2]);
             //Console.WriteLine(food[3]);
 
-            //food.Remove("fries");
-            //food.Insert(0, "sushi");
-            //Console.WriteLine(food.Count);
-            //Console.WriteLine(food.IndexOf("pizza"));
-            //Console.WriteLine(food.LastIndexOf("fries"));
-            //Console.WriteLine(food.Contains("pizza"));
-            //food.Sort();
-            //food.Reverse();
-            //food.Clear();
-            //String[] foodArray = food.ToArray();
+            //food.Remove("fries"); //xóa phần tử chỉ định
+            //food.Insert(0, "sushi"); // thêm phần tử vào bằng cách truyền 2 tham số thứ nhất vị trí index, thứ hai là nội dung
+            //Console.WriteLine(food.Count); // đếm số lượng trong mảng food
+            //Console.WriteLine(food.IndexOf("pizza")); // tìm vị trí của phần tử
+            //Console.WriteLine(food.LastIndexOf("fries")); // tìm vị trí cuối cùng của phần tử đó đứng, thí dụ phần tử đó ở 2 vị trí thì tìm tới vị trí cuối
+            //Console.WriteLine(food.Contains("pizza")); // xem thử phần tử này có tồn tại trong mảng không. nếu có trả về true không thì false
+            //food.Sort(); // sắp xếp theo ký tự a -> z
+            //food.Reverse(); // đảo ngược mảng hiện tại đầu xuống đuôi và đuôi lên đầu
+            //food.Clear(); // xóa hết các phần tử có trong mảng
+            //String[] foodArray = food.ToArray(); //  gán cho foodArray làm food.ToArray() sau đó gán vào vòng lặp dùng vẫn được
 
             foreach (String item in food)
             {
@@ -515,8 +515,8 @@ namespace MyFirstProgram
 
         public int Speed
         {
-            get { return speed; }
-            set                   
+            get { return speed; } //read
+            set                   // writeable
             {
                 if (value > 500)
                 {
@@ -570,7 +570,7 @@ namespace MyFirstProgram
 
     class Car
     {
-        public String Model {get; set;}
+        public String Model {get; set;} //get {return model;}, set {model = value;}
 
         public Car(String model)
         {
@@ -609,19 +609,22 @@ namespace MyFirstProgram
             //Console.WriteLine(Planets.Mercury + " is planet #" + (int)Planets.Mercury);
             //Console.WriteLine(Planets.Pluto + " is planet #" + (int)Planets.Pluto);
 
-            String name = PlanetRadius.Earth.ToString();
-            int radius = (int)PlanetRadius.Earth;
-            double volume = Volume(PlanetRadius.Earth);
+            String name = PlanetRadius.Earth.ToString(); // gán giá trị PlanetRadius.Earth sau khi chuyển hóa thành cuỗi vào name
+            int radius = (int)PlanetRadius.Earth; // gán số của PlanetRadius.Earth vào radius
+            double volume = Volume(PlanetRadius.Earth); // sử dụng function Volume (truyền đối số PlanetRadius.Earth) 
 
-            Console.WriteLine("planet: " + name);
-            Console.WriteLine("radius: " + radius +"km");
+            Console.WriteLine("planet: " + name); // sử dụng lại các biến gán giá trị
+            Console.WriteLine("radius: " + radius +"km");  // sử dụng lại các biến gán giá trị
             Console.WriteLine("volume: " + volume +"km^3");
 
             Console.ReadKey();
         }
+        // đây là nơi xử lý cái đối số truyền vào, sau khi hoành thành xong hàm trả ngược về Volume và nơi gọi Volume này sẽ nhận được giá trị đó
+        //ở đây truyền vào 1 tham số, cái này là enum PlanetRadius, cái này tham số chính radius
         public static double Volume(PlanetRadius radius)
         {
-            double volume = (4.0 / 3.0) * Math.PI * Math.Pow((int)radius, 3);
+                            //Thể tích của hình cầu = (4/3) x Pi x R^3
+            double volume = (4.0 / 3.0) * Math.PI * Math.Pow((int)radius, 3); //Hàm Pow trả về số lũy thừa của số cơ số với số mũ. (int)radius là số và 3 là số mũ
             return volume;
         }
     }
@@ -688,10 +691,15 @@ namespace MyFirstProgram
 
             Console.ReadKey();
         }     
+        // Tái sử dụng code, thay vì 3 cái hàm nhưng tôi ưu làm 1 hàm
+        // Thing này có thể đổi thành T
+        // Thing hoặc T đại diện cho toàn bộ int, double, String. array đại diện intArray, doubleArray, stringArray
         public static void displayElements<Thing>(Thing[] array)
         {
+            // Thing hoặc T đại diện cho toàn bộ int, double, String.|| item là giá trị của mảng || array đại diện intArray, doubleArray, stringArray
             foreach (Thing item in array)
             {
+                // mỗi item được lặp ra và kèm thêm " "
                 Console.Write(item + " ");
             }
             Console.WriteLine();
@@ -705,6 +713,12 @@ multithreading 🧶 Đa luồng
 
 using System;
 using System.Threading;
+// C# được sử dụng để nhập không gian tên System.Threading
+// Đa luồng là một kỹ thuật cho phép một chương trình chạy nhiều tác vụ cùng một lúc. 
+// Điều này có thể cải thiện hiệu suất của chương trình bằng cách cho phép nhiều tác vụ chạy đồng thời, 
+// thay vì phải đợi từng tác vụ hoàn thành trước khi bắt đầu tác vụ tiếp theo.
+
+//Không gian tên System.Threading cung cấp các lớp và phương thức cho phép bạn tạo và quản lý các luồng, đồng thời đồng bộ hóa các luồng với nhau.
 
 namespace MyFirstProgram
 {
@@ -730,6 +744,7 @@ namespace MyFirstProgram
             Luồng hiện đang chạy là "luồng chính" là cách nói rằng luồng chính là luồng đầu tiên được tạo ra khi một chương trình bắt đầu.
             sử dụng System.Threading; là cách nói rằng mã này sử dụng không gian tên System.Threading, có chứa các lớp và API cho phép bạn tạo và quản lý các luồng.
 
+            //Thread lớp: Lớp này đại diện cho một luồng.
             Thread mainThread = Thread.CurrentThread;
             mainThread.Name = "Main Thread";
             //Console.WriteLine(mainThread.Name);
@@ -737,6 +752,9 @@ namespace MyFirstProgram
             Thread thread1 = new Thread(() => CountDown("Timer #1"));
             Thread thread2 = new Thread(() => CountUp("Timer #2"));
 
+
+            //ThreadStart delegate: Delegate này được sử dụng để chỉ định một hàm sẽ được chạy trên một luồng.
+            // Ở đây có 2 luồng 1 và 2
             thread1.Start();
             thread2.Start();
 
@@ -749,6 +767,7 @@ namespace MyFirstProgram
             for (int i = 10; i >= 0; i--)
             {
                 Console.WriteLine("Timer #1 : " + i + " seconds");
+                //Sleep phương thức: Phương thức này được sử dụng để tạm dừng một luồng trong một khoảng thời gian nhất định.
                 Thread.Sleep(1000);
             }
             Console.WriteLine("Timer #1 is complete!");
@@ -758,9 +777,37 @@ namespace MyFirstProgram
             for (int i = 0; i <= 10; i++)
             {
                 Console.WriteLine("Timer #2 : " + i + " seconds");
+
+                //Sleep phương thức: Phương thức này được sử dụng để tạm dừng một luồng trong một khoảng thời gian nhất định.
                 Thread.Sleep(1000);
             }
             Console.WriteLine("Timer #2 is complete!");
         }
     }
 }
+
+
+
+/*
+
+using System.Threading; là một câu lệnh using trong C# được sử dụng để nhập không gian tên System.Threading. 
+Không gian tên này chứa các lớp và phương thức liên quan đến đa luồng.
+
+Đa luồng là một kỹ thuật cho phép một chương trình chạy nhiều tác vụ cùng một lúc. 
+Điều này có thể cải thiện hiệu suất của chương trình bằng cách cho phép nhiều tác vụ chạy đồng thời, 
+thay vì phải đợi từng tác vụ hoàn thành trước khi bắt đầu tác vụ tiếp theo.
+
+Không gian tên System.Threading cung cấp các lớp và phương thức cho phép bạn tạo và quản lý các luồng, đồng thời đồng bộ hóa các luồng với nhau.
+
+Một số lớp và phương thức phổ biến trong không gian tên System.Threading bao gồm:
+
+Thread lớp: Lớp này đại diện cho một luồng.
+ThreadStart delegate: Delegate này được sử dụng để chỉ định một hàm sẽ được chạy trên một luồng.
+Join phương thức: Phương thức này được sử dụng để đợi một luồng hoàn thành.
+Sleep phương thức: Phương thức này được sử dụng để tạm dừng một luồng trong một khoảng thời gian nhất định.
+Mutex lớp: Lớp này được sử dụng để đồng bộ hóa các luồng truy cập tài nguyên chung.
+Semaphore lớp: Lớp này được sử dụng để giới hạn số lượng luồng có thể truy cập tài nguyên chung cùng một lúc.
+Để sử dụng không gian tên System.Threading, bạn cần nhập nó bằng cách sử dụng câu lệnh using System.Threading;. 
+Sau khi không gian tên được nhập, bạn có thể sử dụng các lớp và phương thức trong không gian tên trong mã của mình.
+
+*/
