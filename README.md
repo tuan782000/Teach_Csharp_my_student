@@ -40,8 +40,8 @@ Class là 1 khuôn mẫu để tạo ra thực thể đó.
 
 Circle circle = new Circle(5);
 
-===============================================================
-"Còn trừu tượng hóa là có 2 thứ là abstract class và interface."
+
+Kết luận: "Còn trừu tượng hóa là có 2 thứ là abstract class và interface."
 
 
 ## Tính Đóng gói (Encapsulation)
@@ -69,7 +69,7 @@ Có 1 số BACKPLACTICE thí dụ thuộc tính Properties/Fields nó private xo
 
 => Tóm lại bản chất của Tính đóng gói là cho người ta thấy những thông tin mà bạn muốn cho người ta thấy về cái object này, các thông tin bạn không muốn cho người ta thấy thì bạn sẽ giấu nó đi
 
-==================================================
+Kết luận:
 Đóng gói là cách mình che đậy một số thông tin thông qua các access modifier như public, protected, private, default. 
   - Public: Các thuộc tính và phương thức được khai báo là public có thể truy cập được từ bên trong lớp và bên ngoài lớp.
   - Default: huộc tính default có thể truy cập được từ bên trong lớp và từ các lớp trong cùng một gói (package).
@@ -88,7 +88,7 @@ Class Person tưởng tượng nó là 1 class cha. Class cha này có các thu�
 Class Developer tưởng tượng là nó 1 class con. Class con này kế thừa từ cha thì Class con này có đầy đủ các tính chất Properties/Fields và methods/functions từ thằng cha
 Tương tự cho Manager và Designer. 
 
-======================================================
+Kết luận:
 Kế thừa là lớp con (class child) sẽ có hết những thuộc tính và phương thức của lớp cha (class parent) thông qua từ khóa extend (kế thừa) 
 
 ## Đa hình (Polymorphism)
@@ -103,7 +103,7 @@ các Polymorphism làm 1 việc là các class con từ kế thừa overwrite l�
 ở ví dụ trên các class developer, designer, Manager sẽ có các hàm goToWork() kế thừa lại từ class cha Person. Nhưng developer, designer, Manager tính chất công việc 3 thằng này khác nhau.
 Chính vì vậy bên trong hàm goToWork() mỗi thằng sẽ cần viết lại overwrite lại theo cách riêng của mỗi developer, designer, Manager
 
-======================================================
+Kết luận:
 Đa hình là có 2 khái niệm là overriding và overloading.
 Overriding là mình sẽ thay đổi lại hành vi xử lý của 1 method.
 Còn overloading là có nhiều method cùng tên nhưng khác số lượng, thứ tự các parameter.
